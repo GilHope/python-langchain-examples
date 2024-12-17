@@ -11,5 +11,3 @@
 3. Install dependencies with Poetry:
 
 `poetry install`
-
-4.
