@@ -19,12 +19,22 @@ docs = loader.load_and_split(
     text_splitter=text_splitter
 )
 
-db = Chorma.from_documents(
+db = Chroma.from_documents(
     docs,
     embedding=embeddings,
     persist_directory="emb"
 )
 
-for doc in docs:
-    print(doc.page_content)
+# for doc in docs:
+#     print(doc.page_content)
+#     print("\n")
+
+results = db.similarity_search_with_score(
+    "What is an interesting fact about the English language?",
+    k=2
+)
+
+for result in results:
     print("\n")
+    print(result[1])
+    print(result[0].page_content)
