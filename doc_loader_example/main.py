@@ -7,7 +7,7 @@ load_dotenv()
 text_splitter = CharacterTextSplitter(
     separator="\n",
     chunk_size=200,
-    chunk_overlap=0
+    chunk_overlap=100
 )
 
 loader = TextLoader("facts.txt")
