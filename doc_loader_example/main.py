@@ -25,10 +25,6 @@ db = Chroma.from_documents(
     persist_directory="emb"
 )
 
-# for doc in docs:
-#     print(doc.page_content)
-#     print("\n")
-
 results = db.similarity_search_with_score(
     "What is an interesting fact about the English language?",
     k=2
