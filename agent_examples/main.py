@@ -1,17 +1,21 @@
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain.prompts import (
     ChatPromptTemplate,
     HumanMessagePromptTemplate,
     MessagesPlaceholder
 )
-from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
+from langchain.agents import create_openai_functions_agent, AgentExecutor
 from dotenv import load_dotenv
 
 from tools.sql import run_query_tool
 
+# Load environment variables
 load_dotenv()
 
+# Initialize Chat Model
 chat = ChatOpenAI()
+
+# Create Prompt Template
 prompt = ChatPromptTemplate(
     messages=[
         HumanMessagePromptTemplate.from_template("{input}"),
@@ -19,18 +23,23 @@ prompt = ChatPromptTemplate(
     ]
 )
 
+# Define Tools
 tools = [run_query_tool]
 
-agent = OpenAIFunctionsAgent(
+# Create Agent
+agent = create_openai_functions_agent(
     llm=chat,
     prompt=prompt,
-    tools=[run_query_tool]
+    tools=tools
 )
 
+# Create AgentExecutor
 agent_executor = AgentExecutor(
     agent=agent,
     verbose=True,
-    tools=[tools]
+    tools=tools  # Pass the tools directly, not as [tools]
 )
 
-agent_executor("How many users are in the database?")
+# Execute Agent
+response = agent_executor({"input": "How many users are in the database?"})
+print(response)
