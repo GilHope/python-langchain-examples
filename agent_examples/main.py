@@ -16,6 +16,9 @@ load_dotenv()
 # Initialize Chat Model
 chat = ChatOpenAI()
 
+tables = list_tables()
+print(tables)
+
 # Create Prompt Template
 prompt = ChatPromptTemplate(
     messages=[
