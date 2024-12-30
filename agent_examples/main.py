@@ -8,7 +8,7 @@ from langchain.schema import SystemMessage
 from langchain.agents import create_openai_functions_agent, AgentExecutor
 from dotenv import load_dotenv
 
-from tools.sql import run_query_tool
+from tools.sql import run_query_tool, list_tables
 
 # Load environment variables
 load_dotenv()
