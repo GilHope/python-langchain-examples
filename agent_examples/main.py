@@ -41,5 +41,5 @@ agent_executor = AgentExecutor(
 )
 
 # Execute Agent
-response = agent_executor({"input": "How many users are in the database?"})
+response = agent_executor({"input": "How many users have provided a shipping address?"})
 print(response)
