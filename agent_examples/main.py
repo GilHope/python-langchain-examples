@@ -17,12 +17,11 @@ load_dotenv()
 chat = ChatOpenAI()
 
 tables = list_tables()
-print(tables)
 
 # Create Prompt Template
 prompt = ChatPromptTemplate(
     messages=[
-        SystemMessage(content="You are an AI that has access to a SQLite database."),
+        SystemMessage(content=f"You are an AI that has access to a SQLite database.\n{tables}"),
         HumanMessagePromptTemplate.from_template("{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
     ]
