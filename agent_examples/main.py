@@ -37,7 +37,7 @@ agent = create_openai_functions_agent(
 agent_executor = AgentExecutor(
     agent=agent,
     verbose=True,
-    tools=tools  # Pass the tools directly, not as [tools]
+    tools=tools  
 )
 
 # Execute Agent
