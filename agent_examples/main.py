@@ -4,6 +4,7 @@ from langchain.prompts import (
     HumanMessagePromptTemplate,
     MessagesPlaceholder
 )
+from langchain.schema import SystemMessage
 from langchain.agents import create_openai_functions_agent, AgentExecutor
 from dotenv import load_dotenv
 
@@ -18,6 +19,7 @@ chat = ChatOpenAI()
 # Create Prompt Template
 prompt = ChatPromptTemplate(
     messages=[
+        SystemMessage("You are an AI that has access to a SQLite database."),
         HumanMessagePromptTemplate.from_template("{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
     ]
