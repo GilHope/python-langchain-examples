@@ -3,5 +3,4 @@ venv/
 
 storage/
 
-doc_loader_example/__pycache__/
-agent_examples/tools/__pycache__/
+__pycache__/
