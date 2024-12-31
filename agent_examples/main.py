@@ -28,7 +28,7 @@ prompt = ChatPromptTemplate(
 )
 
 # Define Tools
-tools = [run_query_tool]
+tools = [run_query_tool, describe_tables_tool]
 
 # Create Agent
 agent = create_openai_functions_agent(
