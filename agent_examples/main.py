@@ -35,7 +35,7 @@ prompt = ChatPromptTemplate(
     ]
 )
 
-memory = ConversationBufferMemory(memory="chat_history", return_messages=True)
+memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
 # Define Tools
 tools = [
@@ -58,10 +58,6 @@ agent_executor = AgentExecutor(
     tools=tools,  
     memory=memory
 )
-
-# # Execute Agent
-# response = agent_executor({"input": "Summarize the top 5 most popular products. Write the results to a report file."})
-# print(response)
 
 agent_executor.invoke(
     {"input": "How many orders are there? Write the result to an html report."}
