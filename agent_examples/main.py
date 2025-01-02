@@ -54,6 +54,13 @@ agent_executor = AgentExecutor(
     tools=tools  
 )
 
-# Execute Agent
-response = agent_executor({"input": "Summarize the top 5 most popular products. Write the results to a report file."})
-print(response)
+# # Execute Agent
+# response = agent_executor({"input": "Summarize the top 5 most popular products. Write the results to a report file."})
+# print(response)
+
+agent_executor.invoke(
+    {"input": "How many orders are there? Write the result to an html report."}
+)
+agent_executor.invoke(
+    {"input": "Repeat the exact same process for users."}
+)
