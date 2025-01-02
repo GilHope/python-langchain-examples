@@ -11,12 +11,17 @@ from dotenv import load_dotenv
 
 from tools.sql import run_query_tool, list_tables, describe_tables_tool
 from tools.report import write_report_tool
+from handlers.chat_model_start_handler import ChatModelStartHandler
 
 # Load environment variables
 load_dotenv()
 
+handler = ChatModelStartHandler()
+
 # Initialize Chat Model
-chat = ChatOpenAI()
+chat = ChatOpenAI(
+    callbacks=[handler]
+)
 
 tables = list_tables()
 
@@ -54,7 +59,7 @@ agent = create_openai_functions_agent(
 # Create AgentExecutor
 agent_executor = AgentExecutor(
     agent=agent,
-    verbose=True,
+    # verbose=True,
     tools=tools,  
     memory=memory
 )
