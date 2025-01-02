@@ -6,6 +6,7 @@ from langchain.prompts import (
 )
 from langchain.schema import SystemMessage
 from langchain.agents import create_openai_functions_agent, AgentExecutor
+from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
 
 from tools.sql import run_query_tool, list_tables, describe_tables_tool
@@ -28,10 +29,13 @@ prompt = ChatPromptTemplate(
             "Do not make any assumptions about what tables exist "
             "or what columns exist. Instead, use the 'describe_tables' function"
         )),
+        MessagesPlaceholder(variable_name="chat_history"),
         HumanMessagePromptTemplate.from_template("{input}"),
         MessagesPlaceholder(variable_name="agent_scratchpad")
     ]
 )
+
+memory = ConversationBufferMemory(memory="chat_history", return_messages=True)
 
 # Define Tools
 tools = [
@@ -51,7 +55,8 @@ agent = create_openai_functions_agent(
 agent_executor = AgentExecutor(
     agent=agent,
     verbose=True,
-    tools=tools  
+    tools=tools,  
+    memory=memory
 )
 
 # # Execute Agent
